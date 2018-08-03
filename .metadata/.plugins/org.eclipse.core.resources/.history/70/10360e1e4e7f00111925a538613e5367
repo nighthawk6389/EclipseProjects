@@ -1,0 +1,38 @@
+
+public class SDCost {
+	
+	int source;
+	int destination;
+	int cost;
+	
+	public SDCost(int source, int destination, int cost){
+		this.source = source;
+		this.destination = destination;
+		this.cost = cost;
+	}
+	
+	public int getSource() {
+		return source;
+	}
+	public void setSource(int source) {
+		this.source = source;
+	}
+	public int getDestination() {
+		return destination;
+	}
+	public void setDestination(int destination) {
+		this.destination = destination;
+	}
+	public int getCost() {
+		return cost;
+	}
+	public void setCost(int cost) {
+		this.cost = cost;
+	}
+	
+	public String toString(){
+		return "[" + source + "->" + destination + " : " + cost + "]"; 
+	}
+	
+	
+}

@@ -1,0 +1,19 @@
+package mavisBeacon.motw;
+
+import android.util.Log;
+import android.view.View;
+import android.widget.ScrollView;
+
+public class SmartScrollView extends ScrollView{
+	
+	@Override
+	protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+	        View view = (View) getChildAt(getChildCount()-1);
+	        int diff = (view.getBottom()-(getHeight()+getScrollY()));// Calculate the scrolldiff
+	        if( diff == 0 ){  // if diff is zero, then the bottom has been reached
+	            Log.d(ScrollTest.LOG_TAG, "MyScrollView: Bottom has been reached" );
+	        }
+	        super.onScrollChanged(l, t, oldl, oldt);
+	}
+
+}

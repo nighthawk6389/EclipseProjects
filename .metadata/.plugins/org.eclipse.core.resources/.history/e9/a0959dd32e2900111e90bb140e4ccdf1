@@ -1,0 +1,252 @@
+package mavisBeacon.motw;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+
+import android.util.Log;
+
+public class GetMediaHelper {
+    
+    public GetMediaHelper(){
+        
+    }
+    
+	private static String WINNERS = "winners";
+	private static String ARTICLES = "articles";
+	private static String VIDEOS = "videos";
+    private static String MISC = "misc";
+    private static String NONE = "summary";
+    static String temp;
+    
+    
+    private static BufferedReader getURLStream(String restOfURL){
+        URL url = null;
+        try {
+            url = new URL("http://www.sidebump.com/mediaoftheweek/"+restOfURL);
+        } catch (MalformedURLException ex) {
+        	Log.d("GetMediaHelper", "Malformed URL exception: " + ex.toString());
+            return null;
+        }
+        
+        BufferedReader stream = null;
+		try {
+			stream = new BufferedReader(new InputStreamReader(url.openStream()));
+		} catch (IOException ex) {
+        	Log.d("GetMediaHelper", "Io exception: " + ex.toString());
+			return null;
+		}
+		
+		return stream;
+    }
+    
+    public static Map<String,List> getCurrentMediaList() {
+		return getMediaListAtIndex(1);
+	}
+    
+    public static Map<String,List> getMediaListAtIndex(int index) {
+		BufferedReader stream = GetMediaHelper.getURLStream("media/index.php");
+		if(stream == null){
+			return null;
+		}
+		Scanner s = new Scanner(stream);
+		//s.useDelimiter("\r\n\t ");
+		
+		int counter = 0;
+		String line = "";
+		while(counter++ < index && s.hasNext())
+			line = s.next();
+		
+		return getMediaList("media/"+line);
+	}
+	
+    public static Map<String,List> getMediaList(String restOfURL){
+
+    	try{
+	    	BufferedReader stream = GetMediaHelper.getURLStream(restOfURL);
+	    	if(stream == null)
+	    		return null;
+			
+			List winnersLink = new ArrayList();
+			List articlesLink = new ArrayList();
+			List videosLink = new ArrayList();
+			List winnersSum = new ArrayList();
+			List articlesSum = new ArrayList();
+			List videosSum = new ArrayList();
+	        List miscLink = new ArrayList();
+			List miscSum = new ArrayList();
+			
+			List date = new ArrayList();
+			String dateString = GetMediaHelper.getDateFromFileTitle(restOfURL);
+			date.add(dateString);
+			
+			Map<String,List> holder = new HashMap<String,List>();
+			holder.put("winnersLink",winnersLink);
+			holder.put("winnersSum",winnersSum);
+			holder.put("articlesLink",articlesLink);
+			holder.put("articlesSum",articlesSum);
+			holder.put("videosLink",videosLink);
+			holder.put("videosSum",videosSum);
+			holder.put("miscLink",miscLink);
+			holder.put("miscSum",miscSum);
+			holder.put("winnersLength", new ArrayList());
+			holder.put("articlesLength", new ArrayList());
+			holder.put("videosLength", new ArrayList());
+			holder.put("miscLength", new ArrayList());
+			holder.put("winnersTags", new ArrayList());
+			holder.put("articlesTags", new ArrayList());
+			holder.put("videosTags", new ArrayList());
+			holder.put("miscTags", new ArrayList());
+			holder.put("date",date);
+			
+			String currentType = NONE;
+			Scanner s = new Scanner(stream);
+			String next = "";
+			String link = "";
+			String summary = "";
+			boolean lengthSet = false;
+			int length = RecentActivity.SHORT;
+			while(s.hasNext()){
+				next = s.nextLine();
+	                        if(next.length() < 0)
+	                            continue;
+	                        
+	            if(next.isEmpty() || next.equals("") || next.equals(" ")){
+	                putCorrectFieldsIntoArrays(holder,currentType,link,summary,length);
+	                summary = "";
+	                link = "";
+	            }
+				if( next.equalsIgnoreCase("winners") || next.equalsIgnoreCase("winners:")){			
+					currentType = WINNERS;
+					continue;
+				}
+				if ( next.equalsIgnoreCase("articles") || next.equalsIgnoreCase("articles:") ){
+					currentType = ARTICLES;
+					continue;
+				}
+				if( next.equalsIgnoreCase("videos") || next.equalsIgnoreCase("articles:") ){
+					currentType = VIDEOS;
+					continue;
+				}
+				if( next.equalsIgnoreCase("misc") || next.equalsIgnoreCase("misc.") || next.equalsIgnoreCase("misc:") ){
+					currentType = MISC;
+					continue;
+				}
+				
+				if( next.startsWith("Length:")){
+					length = getLengthFromString(next);
+					continue;
+				}
+				if( next.startsWith("Tags:")){
+					continue;
+				}
+				
+				if( next.contains("http") || next.contains("www")){
+					link = next;
+	                continue;
+				}
+				
+				if( next.equals("") || next.equals(" ") || next.equals("\n"))
+					summary += next;
+				else
+					summary += next+"\n";
+				
+				temp = next;
+			}
+			return holder;
+		
+    	} catch(Throwable t){
+    		Log.v("GetMediaHelper","Temp: "+ temp+ " "+t.toString());
+    	}
+    	
+    	return null;
+		
+	}
+
+   public static String getDateFromFileTitle(String restOfURL) {
+    	
+		int indexUnderscore = restOfURL.indexOf("_");
+		int indexDot = restOfURL.indexOf(".php");
+		String dateString = "";
+		try{
+			dateString = restOfURL.substring(indexUnderscore+1, indexDot);
+		} catch(Throwable t){
+			Log.e("getDateFromFileTitle", t.toString());
+		}
+		return dateString;
+	}
+
+	private static void putCorrectFieldsIntoArrays(Map<String,List> holder, 
+    		String currentType, String link, String summary, int length) {
+        
+		if( link.length() < 1)
+			return;
+		
+        if( Character.isDigit(link.charAt(0))){
+            int from = 1;
+            if( !Character.isLetter(link.charAt(1)))
+                from = 2;
+            link = link.substring(from);
+        }
+        
+        if( !link.startsWith("http") && !link.startsWith("www")){
+            int index = link.indexOf("http");
+            if( index == -1){
+                index = link.indexOf("www");
+            }
+            
+            summary += link.substring(0, index);
+            link = link.substring(index);
+        }
+        
+        holder.get(currentType+"Link").add(link);
+        holder.get(currentType+"Sum").add(summary);
+        holder.get(currentType+"Length").add(length);
+        
+        return;
+    }
+    
+    private static int getLengthFromString(String next){
+    	
+    	if( next.contains("LONG") || next.contains("long")){
+    		return RecentActivity.LONG;
+    	}
+    	if( next.contains("MEDIUM") || next.contains("medium")){
+    		return RecentActivity.MEDIUM;
+    	}
+    	if( next.contains("SHORT") || next.contains("short")){
+    		return RecentActivity.SHORT;
+    	}
+    	return RecentActivity.SHORT;
+    	
+    	
+    }
+
+	public static List<String> getIndexList() {
+		
+		List list = new ArrayList();
+		
+		BufferedReader stream = GetMediaHelper.getURLStream("media/index.php");
+		if(stream == null){
+			return null;
+		}
+		Scanner s = new Scanner(stream);
+		String line = "";
+		while( s.hasNext()){
+			line = s.next();
+			list.add(line);
+		}
+		
+		return list;
+	}
+        
+        
+
+}

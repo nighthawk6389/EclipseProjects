@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    >
+    
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dip"
+        android:layout_marginBottom="10dip">
+		<Button 
+			android:id="@+id/refresh"
+			android:background="@drawable/ic_refresh3"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="10dip" />
+	    
+	    <TextView 
+	        android:layout_width="match_parent"
+	    	android:layout_height="wrap_content"
+	        android:text="Media of the week"
+	        android:gravity="center"
+	        android:layout_gravity="center"
+	        android:layout_marginLeft="-65px"
+	        android:textSize="20dip"
+	        android:textStyle="bold"
+	        android:textColor="#18b4e4"
+	        ></TextView>
+	</LinearLayout>
+    <Button
+        android:id="@+id/feedback"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:padding="0px"
+        android:text="Let Sam Know What You Think!"
+        android:textSize="18px" />
+ 
+    <TabHost 
+    android:id="@android:id/tabhost"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_marginTop="-10px">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:padding="0dp">
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:padding="5dp">              
+        </FrameLayout>
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0" />
+    </LinearLayout>
+</TabHost>
+     
+</LinearLayout>

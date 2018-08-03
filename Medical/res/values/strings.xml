@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, DrTablet!</string>
+    <string name="app_name">DrTablet</string>
+    <string name='drink'>Is the child able to drink?</string>
+    <string name='vomit'>Does the child vomit everything?</string>
+    <string name='convulse'>Has the child had convulsions?</string>
+    <string name='unconscious'>Is the child unconscious?</string>
+    <string name='convulsing'>Is the child convulsing?</string>
+    <string name='breathe'>Does the child have difficulty breathing?</string>
+    <string name='diarrhoea'>Does the child have diarrhoea?</string>
+    <string name='warning'>This child needs urgent medical attention. Complete the assessment right away so that the patient can receive immediate medical attetion</string>
+    <string name='diagnosis'>The child is experiencing danger signs and may have pneumonia.Refer to hospital immediately</string>
+    <string name='old'>How old is the child?</string>
+    <string name='breathesMin'>Breathes in one minute</string>
+</resources>

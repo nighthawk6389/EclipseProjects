@@ -1,0 +1,6 @@
+
+public class Cost {
+	
+	int source;
+	int destination;
+}

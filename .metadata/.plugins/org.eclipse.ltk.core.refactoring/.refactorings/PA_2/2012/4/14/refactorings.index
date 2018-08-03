@@ -1,0 +1,6 @@
+1333650207008	Rename type 'Cost'
+1333660443522	Rename local variable 'id'
+1333660462577	Rename local variable 'id'
+1333660470626	Rename local variable 'id'
+1333663371481	Rename method 'reEvaluteCostToNeighbors'
+1333750322650	Encapsulate field 'directCost'

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+    
+    <TextView
+	    android:text="@string/old"
+	    android:textSize="15pt"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_weight="0"/>
+	 <RadioGroup
+  		android:layout_width="fill_parent"
+  		android:layout_height="wrap_content"
+  		android:orientation="vertical">
+  		
+  			<RadioButton android:id="@+id/radio1"
+    		android:layout_width="fill_parent"
+    		android:layout_height="wrap_content"
+    		android:text="2 to 12 months" />
+    	
+   			<RadioButton android:id="@+id/radio2"
+    		android:layout_width="fill_parent"
+    		android:layout_height="wrap_content"
+    		android:text="2 to 12 months" />
+	 </RadioGroup>
+    	
+    <TextView
+	    android:text="@string/breathesMin"
+	    android:textSize="12pt"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_weight="0"/>
+	    
+	 <EditText
+    	android:id="@+id/edit"
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"/>
+	 
+     <Button
+        android:id="@+id/next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dip"
+        android:text="Next" />	
+ </LinearLayout>

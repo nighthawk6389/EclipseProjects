@@ -1,0 +1,24 @@
+package mavisBeacon.helloAndroid;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+
+	
+public class ButtonOne extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		
+		
+		FetchURLListener l = new FetchURLListener(this,0,"","","","","");
+        View view = l.getManufacturers();
+		
+		super.setContentView(view);
+
+
+	}
+
+}

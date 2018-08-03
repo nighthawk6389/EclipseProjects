@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="mavisBeacon.helloAndroid"
+      android:versionCode="1"
+      android:versionName="1.0">
+    <application android:icon="@drawable/icon" android:label="@string/app_name">
+        <activity android:name=".HelloAndroid"
+                  android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:label="@string/app_name"
+            android:name=".ButtonOne" >
+            <intent-filter >
+                <action android:name="mavisBeacon.helloAndroid.BUTTONONE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:label="@string/app_name"
+            android:name=".Years" >
+            <intent-filter >
+                <action android:name="mavisBeacon.helloAndroid.YEARS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:label="@string/app_name"
+            android:name=".Models" >
+            <intent-filter >
+                <action android:name="mavisBeacon.helloAndroid.MODELS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:label="@string/app_name"
+            android:name=".Trims" >
+            <intent-filter >
+                <action android:name="mavisBeacon.helloAndroid.TRIMS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:label="@string/app_name"
+            android:name=".Search" >
+            <intent-filter >
+                <action android:name="mavisBeacon.helloAndroid.SEARCH" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:label="@string/app_name"
+            android:name=".TabData" >
+            <intent-filter >
+                <action android:name="mavisBeacon.helloAndroid.TAB_DATA" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:label="@string/app_name"
+            android:name=".ModelDetails" >
+            <intent-filter >
+                <action android:name="mavisBeacon.helloAndroid.MODEL_DETAILS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:label="@string/app_name"
+            android:name=".MSRP" >
+            <intent-filter >
+                <action android:name="mavisBeacon.helloAndroid.MSRP" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:label="@string/app_name"
+            android:name=".EstimatePayment" >
+            <intent-filter >
+                <action android:name="mavisBeacon.helloAndroid.ESTIMATE_PAYMENT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:label="@string/app_name"
+            android:name=".Reviews" >
+            <intent-filter >
+                <action android:name="mavisBeacon.helloAndroid.REVIEWS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:label="@string/app_name"
+            android:name=".Tabs" >
+            <intent-filter >
+                <action android:name="mavisBeacon.helloAndroid.TABS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+    </application>
+    <uses-sdk android:minSdkVersion="5" />
+    <uses-permission
+        android:name="android.permission.INTERNET" />
+</manifest> 

@@ -1,0 +1,4 @@
+1334172860034	Rename method 'reEvaluteCostToNeighbor'
+1334173074234	Rename local variable 'node'
+1334177964081	Rename field 'messagesRecieved'
+1334179312948	Encapsulate field 'nextHop'

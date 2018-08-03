@@ -1,0 +1,70 @@
+package mavisBeacon.motw;
+
+import java.util.List;
+import java.util.Map;
+
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TableLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class RecentActivity extends MediaTab {
+
+	private String titleName = "Weekly";
+	
+	public void onCreate(Bundle savedInstanceState) {
+    	super.onCreate(savedInstanceState);
+    	
+    	super.updateView(false);
+    	    	
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	protected View runUpdate(){
+		
+    	LinearLayout ll = new LinearLayout(this);
+    	ll.setOrientation(LinearLayout.VERTICAL);
+    	ll.setBackgroundColor(Color.WHITE);
+    	ll.setGravity(Gravity.FILL);
+    	ll.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT,1));
+    	
+       	Map<String,List> holder = GetMediaHelper.getCurrentMediaList();
+       	if( holder == null ){
+       		return null;
+       	}
+       	
+       	String date = this.getDateFromHolder(holder);
+    	TextView title = this.createCategoryTitle(titleName + " from " + date);
+    	TextView winnersTitle = this.createCategoryTitle("Winners");
+    	TextView videosTitle = this.createCategoryTitle("Videos");
+    	TextView articlesTitle = this.createCategoryTitle("Articles");
+       	TableLayout winnersTable = this.createMediaTable(holder, "winners");
+    	TableLayout videosTable = this.createMediaTable(holder, "videos"); 
+    	TableLayout articlesTable = this.createMediaTable(holder, "articles");
+    	
+    	ll.addView(title);
+       	ll.addView(this.createBreakLine());
+       	ll.addView(winnersTitle);
+       	ll.addView(this.createBreakLine());
+    	ll.addView(winnersTable);
+    	ll.addView(videosTitle);
+       	ll.addView(this.createBreakLine());
+    	ll.addView(videosTable);
+    	ll.addView(articlesTitle);
+       	ll.addView(this.createBreakLine());
+    	ll.addView(articlesTable);
+    	
+    	SmartScrollView sv = new SmartScrollView(this,this);
+    	sv.addView(ll);
+    	
+    	return sv;
+	}
+	
+}

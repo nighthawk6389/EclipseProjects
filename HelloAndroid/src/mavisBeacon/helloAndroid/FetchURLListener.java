@@ -1,0 +1,206 @@
+package mavisBeacon.helloAndroid;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.Toast;
+
+public class FetchURLListener implements OnClickListener {
+	
+	private static String GET_MANUFACTURERS = "getManufacturers.php";
+	private static String GET_YEARS = "getModelYears.php";
+	private static String GET_MODELS = "getModels.php";
+	private static String GET_TRIMS = "getTrims.php";
+	
+	//NEED MORE HERE
+	private static String[] actions = {"manufacturers","years","models","trims","get_model_data"};
+	public static int MANUFACTURERS = 0;
+	public static int YEARS = 1;
+	public static int MODELS = 2;
+	public static int TRIMS = 3;
+	public static int GET_MODEL_DATA = 4;
+	
+	Activity activity;
+	int action;
+	String manufacturer, year, model, trim, transmission;
+
+	public FetchURLListener(Activity activity, int action, String manufacturer, 
+			String year, String model, String trim, String transmission){
+		this.activity = activity;
+		this.action = action;
+		this.manufacturer = manufacturer;
+		this.year = year;
+		this.model = model;
+		this.trim = trim;
+		this.transmission = transmission;
+	}
+
+	@Override
+	public void onClick(View view) {
+		try{
+			if(action > actions.length - 1)
+				return;
+			
+			Intent intent = null;
+			if (action == FetchURLListener.GET_MODEL_DATA){
+				intent = new Intent("mavisBeacon.helloAndroid.TABS");
+				intent.putExtra("manufacturer", this.manufacturer);
+		    	intent.putExtra("year", this.year);
+		    	intent.putExtra("model", this.model);
+		    	intent.putExtra("trim", this.trim);
+		    	intent.putExtra("transmission", this.transmission);
+			} 
+			else{
+				intent = new Intent("mavisBeacon.helloAndroid.SEARCH");
+			}
+			
+			intent.putExtra("action", this.action);
+			intent.putExtra("manufacturer", this.manufacturer);
+			intent.putExtra("year",this.year);
+			intent.putExtra("model", this.model);
+			intent.putExtra("trim",this.trim);
+			intent.putExtra("transmission",this.transmission);
+			
+			activity.startActivity(intent);
+		
+		} catch(Throwable t){
+			Toast.makeText(activity, t.toString(), Toast.LENGTH_LONG).show();
+		}
+	}
+	
+	public View getManufacturers(){
+		ScrollView sv = new ScrollView(activity);
+        LinearLayout layout = new LinearLayout (activity);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        BufferedReader stream = getURLStream(GET_MANUFACTURERS);
+        String line;
+        try {
+			while( (line = stream.readLine()) != null ){
+			    Button b = new Button (activity);
+			    b.setText(line);
+			    //b.setTextSize(10.0f);
+			    //b.setTextColor(Color.rgb( 100, 200, 200));
+			    b.setOnClickListener(new FetchURLListener(activity,action+1,line,"","","",""));  
+			    layout.addView(b);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			Toast.makeText(activity, "ERROR: "+e.toString(), Toast.LENGTH_LONG).show();
+		} // catch
+		
+		sv.addView(layout);
+		return sv;	
+	}
+	
+	public View getYears(){
+		ScrollView sv = new ScrollView(activity);
+        LinearLayout layout = new LinearLayout (activity);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        
+        BufferedReader stream = getURLStream(GET_YEARS+"?manufacturer=" + this.manufacturer);
+        
+        String line;
+        try {
+			while( (line = stream.readLine()) != null ){
+			    Button b = new Button (activity);
+			    b.setText(line);
+			    //b.setTextSize(10.0f);
+			    //b.setTextColor(Color.rgb( 100, 200, 200));
+			    b.setOnClickListener(new FetchURLListener(activity,action+1,this.manufacturer,line,"","",""));  
+			    layout.addView(b);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			Toast.makeText(activity, "ERROR: "+e.toString(), Toast.LENGTH_LONG).show();
+		} // catch
+		
+		sv.addView(layout);
+		return sv;
+		
+	}
+	
+	public View getModels(){
+		ScrollView sv = new ScrollView(activity);
+        LinearLayout layout = new LinearLayout (activity);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        
+        BufferedReader stream = getURLStream(GET_MODELS+"?manufacturer=" + this.manufacturer + "&year=" + this.year);
+        
+        String line;
+        try {
+			while( (line = stream.readLine()) != null ){
+			    Button b = new Button (activity);
+			    b.setText(line);
+			    //b.setTextSize(10.0f);
+			    //b.setTextColor(Color.rgb( 100, 200, 200));
+			    b.setOnClickListener(new FetchURLListener(activity,action+1,this.manufacturer,this.year,line,"",""));  
+			    layout.addView(b);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			Toast.makeText(activity, "ERROR: "+e.toString(), Toast.LENGTH_LONG).show();
+		} // catch
+		
+		sv.addView(layout);
+		return sv;
+		
+	}
+	public View getTrims(){
+		ScrollView sv = new ScrollView(activity);
+        LinearLayout layout = new LinearLayout (activity);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        
+        BufferedReader stream = getURLStream(GET_TRIMS+"?manufacturer=" + this.manufacturer + 
+        		"&year=" + this.year + "&model=" + this.model);
+        
+        String line;
+        try {
+			while( (line = stream.readLine()) != null ){
+			    Button b = new Button (activity);
+			    b.setText(line);
+			    //b.setTextSize(10.0f);
+			    //b.setTextColor(Color.rgb( 100, 200, 200));
+			    String trim = line.substring(0, line.indexOf(" - "));
+			    String transmission = line.substring(line.indexOf("-")+2);
+			    b.setOnClickListener(new FetchURLListener(activity,action+1,this.manufacturer,this.year,this.model,trim,transmission));  
+			    layout.addView(b);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			Toast.makeText(activity, "ERROR: "+e.toString(), Toast.LENGTH_LONG).show();
+		} // catch
+		
+		sv.addView(layout);
+		return sv;
+		
+	}
+	
+	private BufferedReader getURLStream(String restOfURL){
+        URL url = null;
+        try {
+            url = new URL("http://www.sidebump.com/ecarnomics/main/"+restOfURL);
+        } catch (MalformedURLException ex) {
+            System.out.println("MaformedURLException: " + ex.getMessage());
+        }
+        
+        BufferedReader stream = null;
+		try {
+			stream = new BufferedReader(new InputStreamReader(url.openStream()));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			Toast.makeText(activity, "ERROR: "+e1.toString(), Toast.LENGTH_LONG).show();
+		}
+		return stream;
+	}
+
+}

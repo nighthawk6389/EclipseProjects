@@ -1,0 +1,262 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+
+/**
+ * This is a node of the system
+ */
+
+
+public class Node {
+
+	protected int id; // shouldn't be modified once initialized
+	protected ArrayList<Integer> N = new ArrayList<Integer>();
+	
+	/*---------------------
+	/*------STUDENTS-------
+	/*-don't change those--
+	/*-----5 functions-----
+	/*-------------------*/
+	
+	
+	public Node(int id) {
+		super();
+		this.id = id;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void addBaseN(int id) {
+		N.add(id);
+	}
+
+	public void removeBaseN(int id) {
+		for(int k = 0 ; k < N.size() ; k ++ ) 
+			if (N.get(k) == id ) N.remove(k) ;
+	}
+
+	public boolean hasBaseN( int id){
+		for(int k = 0 ; k < N.size() ; k ++ ) 
+			if (N.get(k) == id ) return true;
+		return false;
+	}
+
+	/*----------------------
+	/*------STUDENTS--------
+	/*-your code goes after-
+	/*--------------------*/
+	
+	ArrayList<Neighbor> neighbors = new ArrayList<Neighbor>();
+	HashMap <Integer,ArrayList<SDCost>> costMap = new HashMap <Integer, ArrayList <SDCost> > ();
+
+
+	/**
+	 * Add a neighbor to the node and sets the cost to reach it
+	 * @param id
+	 * @param cost
+	 */
+	public void addNeighbor(int id, int cost){
+		neighbors.add(new Neighbor(id)); 
+		//Check if there is an arrayList for SELF
+		ArrayList<SDCost> costToEveryNode = costMap.get(this.id);
+		if( costToEveryNode == null){
+			costToEveryNode = new ArrayList<SDCost>();
+			costMap.put(this.id, costToEveryNode);
+		}
+		costToEveryNode.add(new SDCost(this.id, id, cost));
+
+		//Create ArrayList for neighbor
+		costMap.put(id, new ArrayList<SDCost>());
+		
+		System.out.println("Added Node " + id + " to Node " + this.id + ". Node  " + this.id + " now has " + costToEveryNode);
+		return;
+		
+	}
+	
+	
+	
+	/**
+	 * Remove the neighbor with the id id
+	 * @param id
+	 */
+	public void removeNeighbor(int id){
+		Neighbor toRemove = null;
+		for(Neighbor n : neighbors){
+			if( n.getId() == id){
+				toRemove = n;
+				break;
+			}
+		}
+		
+		SDCost sdToRemove = null;
+		ArrayList<SDCost> costToEveryNode = costMap.get(id);
+		for(SDCost sdNode : costToEveryNode){
+			if( sdNode.getDestination() == id){
+				sdToRemove = sdNode;
+				break;
+			}
+		}
+		if( toRemove == null){
+			System.out.println("FAIL: Attempted to remove Node " + id + " from Node " + this.id + ". " + this.neighbors);
+			return;
+		}
+		if( sdToRemove == null){
+			System.out.println("FAILSD: Attempted to remove SDNode " + id + " from Node " + this.id + ". " + costToEveryNode);
+			return;
+		}
+		
+		System.out.println("Remove Node("+id+") " + toRemove.getId() +" from Node " + this.id + "");
+		neighbors.remove(toRemove);
+		costToEveryNode.remove(sdToRemove);
+		System.out.println( "Node " + this.id + " now has " + costToEveryNode);
+
+		return;
+	}
+	
+
+
+	/**
+	 * Changes the cost to reach the neighbor with the id id
+	 * @param id
+	 * @param cost
+	 */
+	public void changeCost(int id, int cost){
+		ArrayList<SDCost> costToEveryNode = costMap.get(id);
+		for(SDCost destCost : costToEveryNode){
+			if(destCost.getDestination() == id){
+				destCost.setCost(cost);
+				break;
+			}
+		}
+		System.out.println("Changed cost of  Node [" + this.id + "->" + id +"] to "+ cost);
+		for(Neighbor n : neighbors){
+			int costToNeighbor
+			if( n.)
+		}
+		return;
+	}
+	
+
+	/**
+	 * Return the list of messages a node wants to send in 
+	 * a given turn
+	 * @return
+	 */
+	public ArrayList<Message> turn(){
+		ArrayList<Message> messagesToSend = new ArrayList<Message>();
+		ArrayList<SDCost> costToEveryNode = costMap.get(id);
+		
+		for(Neighbor n : neighbors){
+			//Create message depending on poison reverse
+			String messageString = this.id + " " + this.id + ":0" + " ";
+			for( SDCost node : costToEveryNode){
+				
+				int destID = node.getDestination();
+				int destCost = node.getCost();
+				//Check for poinsonReverse usage
+				if( n.isUsedForAccessTo(destID) ){
+					destCost = Integer.MAX_VALUE;
+					System.out.println("POISON REVERSE: Node " + n.getId() + " is used to acces Node " + destID + " for Node " +id);
+				}
+				messageString +=  destID + ":" + destCost + " ";
+			}
+			System.out.println("turn(): Message from Node " + this.id + " is -- " + messageString);
+			
+			//Create message and add to messageToSend Array
+			Message message = new Message( n.getId() , messageString );
+			messagesToSend.add(message);
+			System.out.println("Sending Message from Node " + this.id + " to Node " + n.getId());
+		}
+		
+		return messagesToSend;
+	}
+
+
+	
+	/**
+	 * Called when a message is received by the node
+	 * @param m
+	 */
+	public void ReceiveMessage(Message m){
+		System.out.println("Received message at Node " + this.id + ". Message: " + m.getText());
+				
+		//Do BellmanFord
+		String messageString = m.getText();
+		String [] messageArray = messageString.split(" ");
+		
+		int from = Integer.parseInt(messageArray[0]);
+		int costToMessageSender = this.getCostToNode(from);
+		
+		ArrayList<SDCost> costToEveryNode = costMap.get(id);
+		ArrayList<SDCost> neighborsCosts = costMap.get(from);
+		
+		for(String nodeDistance : messageArray){
+			String [] nodeDistanceArray = nodeDistance.split(":");
+			if(nodeDistanceArray == null || nodeDistanceArray.length == 1){
+				continue;
+			}
+			
+			//Check if costFromNeighbor + costToNeighbor < currentCost to node
+			int node = Integer.parseInt( nodeDistanceArray[0] );
+			int costToNode = Integer.parseInt( nodeDistanceArray[1] );
+			if( costToMessageSender + costToNode < this.getCostToNode(node) ){
+				this.setCostToNode(node, costToMessageSender + costToNode);
+			}
+			
+			//Insert updated value of Neighbors costs into map
+			
+		}
+		
+		System.out.println("After RECIEVEMESSAGE, CostArray: " + costToEveryNode);
+		return ;
+	}
+
+
+	
+	/**
+	 * Return the output after the algorithm
+	 * @return
+	 */
+	public ArrayList<Entry> sendOutput(){
+		ArrayList<Entry> out = new ArrayList<Entry>();
+		out.add(new Entry(3,19));
+		return out;
+	}
+	
+	private SDCost getSDCostFromID( int id ){
+		ArrayList<SDCost> costToEveryNode = costMap.get(id);
+		for(SDCost node : costToEveryNode){
+			if( node.getDestination() == id){
+				return node;
+			}
+		}
+		return null;
+	}
+	
+	private int getCostToNode(int id){
+		if( id == this.id )
+			return 0;
+		
+		SDCost node = this.getSDCostFromID(id);
+		if( node != null )
+			return node.getCost();
+		
+		// New Node that neighbor introduced
+		return 100000000;
+	}
+	
+	private void setCostToNode(int id, int cost){
+		ArrayList<SDCost> costToEveryNode = costMap.get(id);
+		SDCost node = this.getSDCostFromID(id);
+		if( node != null){
+			node.setCost(cost);
+			return;
+		}
+		//A New node was found
+		node = new SDCost(this.id, id, cost);
+		costToEveryNode.add(node);
+		
+	}
+	
+}

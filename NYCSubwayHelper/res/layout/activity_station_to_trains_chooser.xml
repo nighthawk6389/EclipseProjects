@@ -1,0 +1,141 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".StationToTrainsChooser" >
+        
+    <Spinner
+        android:id="@+id/spinner_train"
+        android:layout_width="100dp"
+        android:layout_height="65dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="28dp"
+        android:fadingEdge="horizontal"
+        android:textAlignment="center"
+        android:background="@+drawable/spinner_default_holo_dark" />	    
+    
+   <Spinner
+       android:id="@+id/spinner_station"
+       android:layout_width="50dp"
+       android:layout_height="65dp"
+       android:layout_alignBottom="@+id/spinner_train"
+       android:layout_alignParentRight="true"
+       android:layout_alignTop="@+id/spinner_train"
+       android:layout_toRightOf="@+id/spinner_train"
+       android:background="@+drawable/spinner_background" />
+    
+        <View
+        android:id="@+id/horizLine"
+        android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:layout_below="@+id/spinner_station"
+        android:background="@color/slate_gray" />
+        
+       <ScrollView
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:layout_below="@+id/spinner_train" >
+            
+         	<LinearLayout
+	            android:id="@+id/linearLayout_scroll"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="vertical"
+	            android:gravity="center">
+
+		        <TextView
+		            android:id="@+id/textView2"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_marginTop="18dp"
+		            android:text="UPTOWN"
+		            android:textAppearance="?android:attr/textAppearanceLarge"
+		            android:textColor="@color/white"
+		            android:gravity="center" />
+		        
+		    	<LinearLayout
+		            android:id="@+id/linearLayout_north"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_marginLeft="10dp"
+		            android:orientation="vertical" >
+		
+		        </LinearLayout>
+		
+		        <TextView
+		            android:id="@+id/textView3"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_marginTop="18dp"
+		            android:text="DOWNTOWN"
+		            android:textAppearance="?android:attr/textAppearanceLarge"
+		            android:textColor="@color/white"
+		            android:gravity="center" />
+		
+			    <ScrollView
+		           android:layout_width="match_parent"
+		           android:layout_height="match_parent"
+		           android:layout_below="@+id/spinner_train" >
+			        <LinearLayout
+			            android:id="@+id/linearLayout_south"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"
+			            android:layout_marginLeft="10dp"
+			            android:orientation="vertical" >
+			
+			        </LinearLayout>
+		        </ScrollView>
+	        
+	        </LinearLayout>
+        
+        </ScrollView>
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignTop="@+id/button_star"
+            android:layout_toLeftOf="@+id/textView2"
+            android:layout_toRightOf="@+id/textView4"
+            android:onClick="refreshClicked"
+            android:scaleType="center"
+            android:src="@drawable/ic_refresh3" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/spinner_station"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="15dp"
+            android:text="Train:"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/spinner_station"
+            android:layout_marginLeft="33dp"
+            android:layout_toRightOf="@+id/imageView1"
+            android:gravity="center_horizontal"
+            android:text="Station:"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/button_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@+id/imageView1"
+            android:background="@drawable/custom_button"
+            android:text="Star this train"
+            android:textColor="@color/white" />
+
+</RelativeLayout>

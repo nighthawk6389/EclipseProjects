@@ -1,0 +1,142 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+
+/**
+ * This is a node of the system
+ */
+
+
+public class Node {
+
+	protected int id; // shouldn't be modified once initialized
+	protected ArrayList<Integer> N = new ArrayList<Integer>();
+	
+	/*---------------------
+	/*------STUDENTS-------
+	/*-don't change those--
+	/*-----5 functions-----
+	/*-------------------*/
+	
+	
+	public Node(int id) {
+		super();
+		this.id = id;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void addBaseN(int id) {
+		N.add(id);
+	}
+
+	public void removeBaseN(int id) {
+		for(int k = 0 ; k < N.size() ; k ++ ) 
+			if (N.get(k) == id ) N.remove(k) ;
+	}
+
+	public boolean hasBaseN( int id){
+		for(int k = 0 ; k < N.size() ; k ++ ) 
+			if (N.get(k) == id ) return true;
+		return false;
+	}
+
+	/*----------------------
+	/*------STUDENTS--------
+	/*-your code goes after-
+	/*--------------------*/
+	
+	HashMap <Integer,ArrayList<SDCost>> costMatrix = new HashMap < Integer , ArrayList <SDCost> >();
+
+
+	/**
+	 * Add a neighbor to the node and sets the cost to reach it
+	 * @param id
+	 * @param cost
+	 */
+	public void addNeighbor(int id, int cost){
+		ArrayList <SDCost> costArray = this.costMatrix.get(this.id);
+		if( costArray == null ){
+			costArray = new ArrayList<SDCost>();
+		}
+		costArray.add(new SDCost(this.id, id, cost)); //SDCost(Source, Destination, Cost)
+		System.out.println("Added Node " + id + " to Node " + this.id + ". Node  " + this.id + "now has " + costMatrix);
+		return;
+		
+	}
+	
+	
+	
+	/**
+	 * Remove the neighbor with the id id
+	 * @param id
+	 */
+	public void removeNeighbor(int id){
+		ArrayList <SDCost> costArray = costMatrix.get(this.id);
+		SDCost toRemove = null;
+		for(SDCost destCost : costArray){
+			if(destCost.getDestination() == id){
+				toRemove = destCost;
+				break;
+			}
+		}
+		costArray.remove(toRemove);
+		System.out.println("Remove Node("+id+") " + toRemove.getDestination() +" from Node " + this.id + ". Node " + this.id + " now has " + costMatrix);
+		return;
+	}
+	
+
+
+	/**
+	 * Changes the cost to reach the neighbor with the id id
+	 * @param id
+	 * @param cost
+	 */
+	public void changeCost(int id, int cost){
+		ArrayList <SDCost> costArray = costMatrix.get(this.id);
+		for(SDCost destCost : costArray){
+			if(destCost.getDestination() == id){
+				destCost.setCost(cost);
+				break;
+			}
+		}
+		System.out.println("Changed cost of  Node [" + this.id + "->" + id +"] to "+ cost);
+		return;
+	}
+	
+
+	/**
+	 * Return the list of messages a node wants to send in 
+	 * a given turn
+	 * @return
+	 */
+	public ArrayList<Message> turn(){
+		ArrayList<Message> messagesToSend = new ArrayList<Mesage>;
+		ArrayList<SDCost> costArray = costMatrix.get(this.id);
+		String 
+		return null;
+	}
+
+
+	
+	/**
+	 * Called when a message is received by the node
+	 * @param m
+	 */
+	public void ReceiveMessage(Message m){
+		return ;
+	}
+
+
+	
+	/**
+	 * Return the output after the algorithm
+	 * @return
+	 */
+	public ArrayList<Entry> sendOutput(){
+		ArrayList<Entry> out = new ArrayList<Entry>();
+		out.add(new Entry(3,19));
+		return out;
+	}	
+}

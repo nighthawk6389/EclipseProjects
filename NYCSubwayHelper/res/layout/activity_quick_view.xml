@@ -1,0 +1,78 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/black" >
+
+    <!-- 
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight=".5" >
+        
+        <TextView
+            android:id="@+id/textview_recent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:text="Recent Stations"
+            android:textColor="@color/slate_gray"
+            android:textSize="20dp" />
+        
+        <ScrollView
+            android:layout_width="match_parent"
+	        android:layout_height="wrap_content">    
+			<LinearLayout
+			    android:id="@+id/ll_listRecent"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="vertical">
+		        
+		    </LinearLayout>
+	    </ScrollView>
+
+    </LinearLayout>
+    
+    <View
+        android:id="@+id/horizLine"
+        android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:layout_below="@+id/spinner_station"
+        android:background="@color/red" />
+    
+     -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1" >
+        
+        <TextView
+            android:id="@+id/textview_favorites"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:text="Starred"
+            android:textColor="@color/slate_gray"
+            android:textSize="20dp" />
+        
+        <ScrollView
+            android:layout_width="match_parent"
+	        android:layout_height="wrap_content">    
+			<LinearLayout
+			    android:id="@+id/ll_listStarred"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="vertical">
+		        
+		    </LinearLayout>
+	    </ScrollView>
+        
+        
+    </LinearLayout>
+
+</LinearLayout>

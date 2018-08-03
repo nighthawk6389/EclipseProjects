@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="305" key="DIALOG_WIDTH"/>
+		<item value="141" key="DIALOG_Y_ORIGIN"/>
+		<item value="1514" key="DIALOG_X_ORIGIN"/>
+		<item value="442" key="DIALOG_HEIGHT"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="false" key="wrap"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="isRegEx"/>
+		<item value="false" key="incremental"/>
+		<item value="false" key="wholeword"/>
+		<item value="Log.d" key="selection"/>
+		<list key="findhistory">
+			<item value="Log.d"/>
+			<item value="Log"/>
+			<item value="load_first_time"/>
+			<item value="Arrive"/>
+			<item value="populateTrainTimesForSide"/>
+			<item value="&quot;Set"/>
+			<item value="Set was NULL"/>
+			<item value="Set was "/>
+		</list>
+		<list key="replacehistory">
+			<item value="protected"/>
+			<item value="canvas.drawCircle"/>
+			<item value="drawCircle"/>
+			<item value="canvas"/>
+			<item value="Main"/>
+		</list>
+	</section>
+</section>

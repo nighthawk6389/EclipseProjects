@@ -1,0 +1,123 @@
+package mavisBeacon.motw;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import android.graphics.Color;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TableLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class Archive extends MediaTab {
+
+	private String titleName = "Archive";
+	private String categoryName = "archive";
+
+	public void onCreate(Bundle savedInstanceState) {
+    	super.onCreate(savedInstanceState);
+    	
+    	super.updateView();
+    	    	
+	}
+	
+	protected View runUpdate() {
+    	LinearLayout ll = new LinearLayout(this);
+    	ll.setOrientation(LinearLayout.VERTICAL);
+    	ll.setBackgroundColor(Color.WHITE);
+    	ll.setGravity(Gravity.FILL);
+    	ll.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT,1));
+    	
+       	List<String> holder = GetMediaHelper.getIndexList();
+       	if( holder == null ){
+       		return null;
+       	}
+       	Iterator itList = holder.iterator();
+       	
+    	TextView title = this.createCategoryTitle(titleName);
+    	
+    	ll.addView(title);
+       	ll.addView(this.createBreakLine());
+    	
+    	while(itList.hasNext()){
+    		String nameOfFile = (String)itList.next();
+           	String week = GetMediaHelper.getDateFromFileTitle(nameOfFile);
+    		TextView view = this.createTitle("Week of " + week);
+    		view.setTextColor(Color.BLUE);
+    		view.setTag(nameOfFile);
+    		view.setOnClickListener(new OnClickListener(){
+				@Override
+				public void onClick(View arg0) {
+					View view = Archive.this.getArchiveView((String)arg0.getTag());
+					Log.d("Archive onclick",arg0.getTag().toString());
+					if(view == null){
+						Archive.this.runOnUiThread(new Runnable() {
+						    public void run() {
+						        Toast.makeText(Archive.this, "An error occurred while contacting the server", Toast.LENGTH_LONG).show();
+						    }
+						});
+						return;
+					}
+					Archive.super.setContentView(view);
+				}
+    		});
+    		ll.addView(view);
+    	}
+       	
+    	ScrollView sv = new ScrollView(this);
+    	sv.setLayoutParams(new ScrollView.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT,1));
+    	sv.setBackgroundColor(Color.WHITE);
+    	sv.addView(ll);
+    	
+    	return sv;
+	}
+	
+	protected View getArchiveView(String fileName){
+		
+    	LinearLayout ll = new LinearLayout(this);
+    	ll.setOrientation(LinearLayout.VERTICAL);
+    	ll.setBackgroundColor(Color.WHITE);
+    	ll.setGravity(Gravity.FILL);
+    	ll.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT,1));
+    	
+       	Map<String,List> holder = GetMediaHelper.getMediaList(fileName);
+       	if( holder == null ){
+       		return null;
+       	}
+       	
+       	String date = this.getDateFromHolder(holder);
+    	TextView title = this.createCategoryTitle(titleName + " from " + date);
+    	TextView winnersTitle = this.createCategoryTitle("Winners");
+    	TextView videosTitle = this.createCategoryTitle("Videos");
+    	TextView articlesTitle = this.createCategoryTitle("Articles");
+       	TableLayout winnersTable = this.createMediaTable(holder, "winners");
+    	TableLayout videosTable = this.createMediaTable(holder, "videos");
+    	TableLayout articlesTable = this.createMediaTable(holder, "articles");
+    	
+    	ll.addView(title);
+       	ll.addView(this.createBreakLine());
+       	ll.addView(winnersTitle);
+       	ll.addView(this.createBreakLine());
+    	ll.addView(winnersTable);
+    	ll.addView(videosTitle);
+       	ll.addView(this.createBreakLine());
+    	ll.addView(videosTable);
+    	ll.addView(articlesTitle);
+       	ll.addView(this.createBreakLine());
+    	ll.addView(articlesTable);
+    	
+    	ScrollView sv = new ScrollView(this);
+    	sv.addView(ll);
+    	
+    	return sv;
+	}
+
+}

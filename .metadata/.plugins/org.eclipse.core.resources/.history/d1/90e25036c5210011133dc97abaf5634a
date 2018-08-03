@@ -1,0 +1,11 @@
+package mavisBeacon.motw;
+
+import android.util.Log;
+import android.view.View;
+import android.widget.ScrollView;
+
+public class SmartScrollView extends ScrollView{
+	
+
+
+}

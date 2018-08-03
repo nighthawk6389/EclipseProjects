@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1257906935174
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.edit.paste",1257906938243
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.file.save",1257906938555
+activated,editor,com.android.ide.eclipse.adt,0.9.4.v200910220141-17704,"com.android.ide.eclipse.editors.layout.LayoutEditor",1257906940700
+activated,editor,com.android.ide.eclipse.adt,0.9.4.v200910220141-17704,"com.android.ide.eclipse.editors.layout.LayoutEditor",1257906941664
+closed,editor,com.android.ide.eclipse.adt,0.9.4.v200910220141-17704,"com.android.ide.eclipse.editors.layout.LayoutEditor",1257906941678
+activated,view,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.PackageExplorer",1257906943138
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1257906943967
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.core.resources"".",1257906944319
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1257906944366
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.edit.delete",1257906944375
+activated,editor,com.android.ide.eclipse.adt,0.9.4.v200910220141-17704,"com.android.ide.eclipse.editors.layout.LayoutEditor",1257906948019
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.file.save",1257906955973
+activated,view,org.eclipse.ui.console,3.4.0.v20090513,"org.eclipse.ui.console.ConsoleView",1257906960133
+activated,editor,com.android.ide.eclipse.adt,0.9.4.v200910220141-17704,"com.android.ide.eclipse.editors.layout.LayoutEditor",1257906962645
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.file.save",1257906964660
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.file.save",1257906968367
+activated,view,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.PackageExplorer",1257906974341
+activated,editor,com.android.ide.eclipse.adt,0.9.4.v200910220141-17704,"com.android.ide.eclipse.editors.layout.LayoutEditor",1257906974779
+activated,view,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.PackageExplorer",1257906984399
+activated,editor,com.android.ide.eclipse.adt,0.9.4.v200910220141-17704,"com.android.ide.eclipse.editors.layout.LayoutEditor",1257906987003
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.file.save",1257906988406
+activated,view,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.PackageExplorer",1257907003194
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1257907011935
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1257907026175

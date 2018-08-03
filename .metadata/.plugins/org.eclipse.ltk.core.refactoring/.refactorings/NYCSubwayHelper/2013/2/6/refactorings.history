@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;NYCSubwayHelper/res/layout/custom_layout.xml&apos; to &apos;custom_tab_layout.xml&apos;" description="Rename resource &apos;custom_layout.xml&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="res/layout/custom_layout.xml" name="custom_tab_layout.xml" stamp="1360268007360" updateReferences="true"/>
+</session>

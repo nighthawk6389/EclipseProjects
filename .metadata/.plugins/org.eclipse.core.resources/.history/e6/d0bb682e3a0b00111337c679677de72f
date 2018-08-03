@@ -1,0 +1,25 @@
+package mavisBeacon.helloAndroid;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+
+public class Years extends Activity{
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		
+		Intent i = this.getIntent();
+		String manufacturer = i.getStringExtra("manufacturer");
+		FetchURLListener l = new FetchURLListener(this,1,manufacturer,"","","","");
+        View view = l.getYears();
+		
+		super.setContentView(view);
+
+
+	}
+
+}

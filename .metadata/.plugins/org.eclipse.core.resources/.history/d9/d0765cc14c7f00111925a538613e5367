@@ -1,0 +1,115 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+
+/**
+ * This is a node of the system
+ */
+
+
+public class Node {
+
+	protected int id; // shouldn't be modified once initialized
+	protected ArrayList<Integer> N = new ArrayList<Integer>();
+	
+	/*---------------------
+	/*------STUDENTS-------
+	/*-don't change those--
+	/*-----5 functions-----
+	/*-------------------*/
+	
+	
+	public Node(int id) {
+		super();
+		this.id = id;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void addBaseN(int id) {
+		N.add(id);
+	}
+
+	public void removeBaseN(int id) {
+		for(int k = 0 ; k < N.size() ; k ++ ) 
+			if (N.get(k) == id ) N.remove(k) ;
+	}
+
+	public boolean hasBaseN( int id){
+		for(int k = 0 ; k < N.size() ; k ++ ) 
+			if (N.get(k) == id ) return true;
+		return false;
+	}
+
+	/*----------------------
+	/*------STUDENTS--------
+	/*-your code goes after-
+	/*--------------------*/
+	
+	HashMap <Integer,ArrayList<SDCost>> costMatrix = new HashMap<Integer,ArrayList<SDCost>>();
+
+
+	/**
+	 * Add a neighbor to the node and sets the cost to reach it
+	 * @param id
+	 * @param cost
+	 */
+	public void addNeighbor(int id, int cost){
+		return;
+		
+	}
+	
+	
+	
+	/**
+	 * Remove the neighbor with the id id
+	 * @param id
+	 */
+	public void removeNeighbor(int id){
+		return;
+	}
+	
+
+
+	/**
+	 * Changes the cost to reach the neighbor with the id id
+	 * @param id
+	 * @param cost
+	 */
+	public void changeCost(int id, int cost){
+		return ;
+	}
+	
+
+	/**
+	 * Return the list of messages a node wants to send in 
+	 * a given turn
+	 * @return
+	 */
+	public ArrayList<Message> turn(){
+		return null;
+	}
+
+
+	
+	/**
+	 * Called when a message is received by the node
+	 * @param m
+	 */
+	public void ReceiveMessage(Message m){
+		return ;
+	}
+
+
+	
+	/**
+	 * Return the output after the algorithm
+	 * @return
+	 */
+	public ArrayList<Entry> sendOutput(){
+		ArrayList<Entry> out = new ArrayList<Entry>();
+		out.add(new Entry(3,19));
+		return out;
+	}	
+}

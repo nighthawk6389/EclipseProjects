@@ -1,0 +1,6 @@
+
+public class SDCost {
+	
+	int source;
+	int destination;
+}

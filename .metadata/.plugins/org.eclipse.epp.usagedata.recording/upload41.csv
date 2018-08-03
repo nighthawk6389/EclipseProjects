@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+activated,view,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.PackageExplorer",1257906882339
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1257906883397
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.core.resources"".",1257906884676
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1257906884722
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.edit.delete",1257906884732
+opened,editor,com.android.ide.eclipse.adt,0.9.4.v200910220141-17704,"com.android.ide.eclipse.editors.layout.LayoutEditor",1257906886153
+activated,editor,com.android.ide.eclipse.adt,0.9.4.v200910220141-17704,"com.android.ide.eclipse.editors.layout.LayoutEditor",1257906886272
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.edit.selectAll",1257906887339
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.edit.copy",1257906888311
+executed,command,org.eclipse.ui.ide,3.5.1.M20090826-0800,"org.eclipse.ui.file.newQuickMenu",1257906892452
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1257906895122
+opened,editor,org.eclipse.ui.editors,3.5.0.v20090527-2000,"org.eclipse.ui.DefaultTextEditor",1257906906829
+activated,editor,org.eclipse.ui.editors,3.5.0.v20090527-2000,"org.eclipse.ui.DefaultTextEditor",1257906906897
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1257906906964
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.edit.paste",1257906908043
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.file.save",1257906908570
+activated,view,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.PackageExplorer",1257906915819
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1257906916613
+closed,editor,org.eclipse.ui.editors,3.5.0.v20090527-2000,"org.eclipse.ui.DefaultTextEditor",1257906917194
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1257906917252
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.edit.delete",1257906917264
+executed,command,org.eclipse.ui.ide,3.5.1.M20090826-0800,"org.eclipse.ui.file.newQuickMenu",1257906919323
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1257906921138
+opened,editor,com.android.ide.eclipse.adt,0.9.4.v200910220141-17704,"com.android.ide.eclipse.editors.layout.LayoutEditor",1257906934900
+activated,editor,com.android.ide.eclipse.adt,0.9.4.v200910220141-17704,"com.android.ide.eclipse.editors.layout.LayoutEditor",1257906935090

@@ -1,0 +1,27 @@
+import java.util.ArrayList;
+
+
+public class Neighbor {
+	
+	private int id;
+	private ArrayList <Integer> poisonReverseUsages = new ArrayList<Integer>();
+	
+	public Neighbor(int id){
+		this.id = id;
+	}
+	
+	public void usedForAccessTo (int i){
+		poisonReverseUsages.add(i);
+	}
+	
+	public boolean 
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+}

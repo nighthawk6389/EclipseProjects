@@ -1,0 +1,37 @@
+package mavisBeacon.helloAndroid;
+
+import java.util.Iterator;
+import java.util.List;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.ScrollView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
+
+public class TabData extends Activity {
+	
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		
+		TableLayout layout = new TableLayout(this);
+		
+		List<String> columns = URLHelper.parseURLDataNewlines("/util/getColumns.php");
+		Iterator<String> it = columns.iterator();
+		while(it.hasNext()){
+			TableRow tr = new TableRow(this);
+			TextView text = new TextView(this);
+			String column = URLHelper.capitalizeAndReplaceUnderscores(it.next());
+			text.setText(column);
+			tr.addView(text);
+			layout.addView(tr);
+		}
+		
+		ScrollView sv = new ScrollView(this);
+		sv.addView(layout)
+		super.setContentView(layout);
+	
+	}
+}

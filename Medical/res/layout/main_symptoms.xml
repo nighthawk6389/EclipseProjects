@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+    
+    <TextView
+    	android:id="@+id/text"
+	    android:text="@string/breathe"
+	    android:textSize="15pt"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_weight="0"/>
+	    
+	    <Button
+        android:id="@+id/yes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dip"
+        android:text="Yes" />
+    	<Button
+        android:id="@+id/no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text"
+        android:layout_toLeftOf="@id/yes"
+        android:layout_marginRight="20dip"
+        android:text="No" />
+    
+</RelativeLayout>

@@ -1,0 +1,349 @@
+package mavisBeacon.motw;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.os.AsyncTask;
+import android.text.util.Linkify;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public abstract class MediaTab extends Activity {
+
+	protected int ROW_PADDING = 10;
+	
+	protected final int MESSAGE_SIZE = 11;
+	protected final int LINK_PADDING = 3;
+	protected final int LINK_NUM_SIZE = 14;
+	protected final int LINK_TITLE_SIZE = 14;
+	protected final int LINK_SUMMARY_SIZE = 12;
+	protected final int LINK_DATE_SIZE = 10;
+	protected final int ARCHIVE_WEEK_BUTTON_SIZE = 14;
+	
+	public static final int LONG = 1001;
+	public static final int MEDIUM = 1002;
+	public static final int SHORT = 1003;
+	
+	public static final int LINEAR_LAYOUT_TABLE_HOLDER = 2001;
+	
+	protected int weekIndex = 1;
+	
+	private int THREAD_DIALOG_ERROR_SLEEP_TIME = 10000;
+	
+	private String weeklyMessage = "message";
+	
+	
+	public void updateView(final boolean append){
+		
+		(new AsyncTask<Void,Void,View>(){
+
+			ProgressDialog dialog;
+
+			@Override
+			protected void onPreExecute() {
+				dialog = ProgressDialog.show(MediaTab.this, "", "Loading...", true);
+			}
+			@Override
+			protected View doInBackground(Void... params) {		
+				try{
+					new Thread(){
+						@Override
+						public void run(){
+							try {
+								Thread.sleep(THREAD_DIALOG_ERROR_SLEEP_TIME);
+							} catch (InterruptedException e) {
+							
+							}
+							if( dialog.isShowing() ){
+								dialog.dismiss();
+								Log.e("Dialog Thread", "Canceled after 5 seconds");
+								MediaTab.this.runOnUiThread(new Runnable() {
+								    public void run() {
+								        Toast.makeText(MediaTab.this, "An error occurred while contacting the server", Toast.LENGTH_LONG).show();
+								    }
+								});
+							}
+						}
+					}.start();
+					
+					View v = null;
+					if(append)
+						v = MediaTab.this.runUpdateForIndex(++weekIndex);
+					else{
+						v= MediaTab.this.runUpdateForNewest();
+						weekIndex = 1;
+					}
+					
+					if( v == null){
+						MediaTab.this.runOnUiThread(new Runnable() {
+						    public void run() {
+						        Toast.makeText(MediaTab.this, "An error occurred while contacting the server", Toast.LENGTH_LONG).show();
+						    }
+						});
+			    		return null;
+			    	}
+					return v;
+				} catch (Throwable t){
+					Log.d("doInBackground", t.toString());
+				}
+				return null;
+			}
+			@Override
+			protected void onPostExecute(View v) {	    	
+				if(v != null){
+					if(append){
+						LinearLayout ll = (LinearLayout)MediaTab.this.findViewById(MediaTab.LINEAR_LAYOUT_TABLE_HOLDER);
+						ll.addView(v);
+					}
+					else{
+				    	SmartScrollView sv = new SmartScrollView(MediaTab.this,MediaTab.this);
+				    	sv.setLayoutParams(new ScrollView.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT,1));
+				    	sv.setBackgroundColor(Color.WHITE);
+				    	sv.addView(v);
+						MediaTab.super.setContentView(sv);
+					}
+				}
+				
+				if(dialog != null){
+					dialog.dismiss();
+				}
+			}
+			
+		}).execute();
+		
+	}
+	
+	protected abstract View getActivityStructureView(Map<String,List> holder);
+	
+	protected View runUpdateForNewest() {
+       	Map<String,List> holder = GetMediaHelper.getCurrentMediaList();
+       	if( holder == null ){
+       		return null;
+       	}
+       	return MediaTab.this.getActivityStructureView(holder);
+	}
+
+	
+	protected View runUpdateForIndex(int index) {
+		Map<String,List> holder = GetMediaHelper.getMediaListAtIndex(index);
+       	if( holder == null ){
+       		return null;
+       	}
+       	return MediaTab.this.getActivityStructureView(holder);
+	}
+	
+	protected void reachedBottomOfScrollPane(){
+		MediaTab.this.updateView(true);
+	}
+	
+	public LinearLayout createMediaLinearLayout(){
+		LinearLayout ll = new LinearLayout(this);
+    	ll.setOrientation(LinearLayout.VERTICAL);
+    	ll.setBackgroundColor(Color.WHITE);
+    	ll.setGravity(Gravity.FILL);
+    	ll.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT,1));
+    	ll.setId(LINEAR_LAYOUT_TABLE_HOLDER);
+    	return ll;
+	}
+	public TableLayout createMediaTable(Map<String,List> holder, String category){
+    	TableLayout table = this.createTable();
+    	List link = holder.get(category+"Link");
+    	List sum = holder.get(category+"Sum");
+    	List length = holder.get(category+"Length");
+    	List date = holder.get("date");
+    	Iterator<String> itLink = link.iterator();
+    	Iterator<String> itSum = sum.iterator();
+    	Iterator<Integer> itLen = length.iterator();
+    	Iterator<String> itDate = date.iterator();
+    	String dateString = "Not available";
+    	if( itDate.hasNext() )
+    		dateString = itDate.next();
+    	
+    	int counter = 1;
+    	while(itLink.hasNext() && itSum.hasNext() && itLen.hasNext()){
+        	TableRow row = this.createMediaTableRow(counter++, itLink.next(), itSum.next(), dateString,itLen.next(),true);
+        	table.addView(row);
+        	table.addView(this.createBreakLine());
+    	}
+    	return table;
+	}
+
+	public TableRow createMediaTableRow(int rowNum, String url, String summary, String date, int length, boolean withBorder){
+		TableRow row = this.createTableRow();
+		
+		TextView count = this.createLinkNum(""+rowNum);
+		
+		ImageView iv = this.createClockImage(length);
+		
+		LinearLayout ll = new LinearLayout(this);
+		ll.setOrientation(LinearLayout.VERTICAL);
+		
+		TableRow.LayoutParams lp = new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, 1);
+		lp.weight = 1 ;
+		ll.setLayoutParams(lp);
+		
+		TextView lt = this.createLinkTitle(url);
+		TextView ls = this.createLinkSummary(summary);
+		TextView ld = this.createLinkDate(date);
+				
+		ll.addView(lt);
+		ll.addView(ls);
+		ll.addView(ld);
+		
+		row.addView(count);
+		row.addView(iv);
+		row.addView(ll);
+		
+		return row;
+	}
+	
+	public TableLayout createTable(){
+		TableLayout table = new TableLayout(this);
+		table.setLayoutParams(new TableLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));
+		table.setColumnShrinkable(2, true);
+		return table;
+	}
+	
+	public TableRow createTableRow(){
+		TableRow row = new TableRow(this);
+		row.setPadding(ROW_PADDING, ROW_PADDING, ROW_PADDING, ROW_PADDING);
+
+		TableRow.LayoutParams params = new TableRow.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);  
+		
+		return row;
+	}
+	public TextView createLinkNum(String text){
+		TextView tv = new TextView(this);
+		tv.setPadding(LINK_PADDING, LINK_PADDING, LINK_PADDING, LINK_PADDING);
+		tv.setTextColor(Color.BLACK);
+		tv.setTextSize(LINK_NUM_SIZE);
+		tv.setText(text);
+		return tv;
+	}
+	public TextView createTitle(String text){
+		TextView tv = new TextView(this);
+		tv.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
+		tv.setPadding(LINK_PADDING, LINK_PADDING, LINK_PADDING, LINK_PADDING);
+		tv.setTextColor(Color.BLACK);
+		tv.setTextSize(LINK_TITLE_SIZE);
+		tv.setText(text);
+		tv.setHorizontallyScrolling(false);
+		return tv;
+	}
+	public TextView createWeeklyMessage(Map<String,List> holder){
+		String message = "";
+		List<String> messageList = holder.get(weeklyMessage);
+		if(messageList == null || messageList.size() < 1)
+			return null;
+			
+		message = messageList.get(0);
+		TextView tv = new TextView(this);
+		tv.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
+		tv.setPadding(LINK_PADDING, LINK_PADDING, LINK_PADDING, LINK_PADDING);
+		tv.setTextColor(Color.BLACK);
+		tv.setTextSize(MESSAGE_SIZE);
+		tv.setText(message);
+		tv.setHorizontallyScrolling(false);
+		return tv;
+		
+	}
+	public TextView createLinkTitle(String text){
+		TextView tv = new TextView(this);
+		tv.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
+		tv.setPadding(LINK_PADDING, LINK_PADDING, LINK_PADDING, LINK_PADDING);
+		tv.setTextColor(Color.BLACK);
+		tv.setTextSize(LINK_TITLE_SIZE);
+		tv.setText(text);
+		tv.setHorizontallyScrolling(false);
+		Linkify.addLinks(tv, Linkify.ALL);
+		return tv;
+	}
+	public TextView createLinkSummary(String text){
+		TextView tv = new TextView(this);
+		tv.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
+		tv.setPadding(LINK_PADDING, LINK_PADDING, LINK_PADDING, LINK_PADDING);
+		tv.setTextColor(Color.BLACK);
+		tv.setTextSize(LINK_SUMMARY_SIZE);
+		tv.setHorizontallyScrolling(false);
+		tv.setText(text);
+		return tv;
+	}
+	public TextView createLinkDate(String text){
+		TextView tv = new TextView(this);
+		tv.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
+		tv.setPadding(LINK_PADDING, LINK_PADDING, LINK_PADDING, LINK_PADDING);
+		tv.setTextColor(Color.GRAY);
+		tv.setTextSize(LINK_DATE_SIZE);
+		tv.setText(text);
+		return tv;
+	}
+	public Button createArchiveWeekButton(String text, String nameOfFile){
+		Button b = new Button(this);
+		b.setText(text);
+		b.setTextSize(ARCHIVE_WEEK_BUTTON_SIZE);
+		b.setTextColor(Color.BLUE);
+		b.setTag(nameOfFile);
+		return b;
+	}
+	public ImageView createClockImage(int length){
+		ImageView iv = new ImageView(this);
+		
+		if( length == SHORT)
+			iv.setImageResource(R.drawable.ic_clock_short);
+		else if ( length == MEDIUM )
+			iv.setImageResource(R.drawable.ic_clock_medium);
+		else if ( length == LONG )
+			iv.setImageResource(R.drawable.ic_clock_long);
+		
+		return iv;
+	}
+	public View createBreakLine(){
+		View line = new View(this);
+    	line.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, 1));
+    	line.setBackgroundColor(Color.rgb(51, 51, 51));
+    	return line;
+	}
+	
+	public TextView createCategoryTitle(String text){
+		TextView tv = new TextView(this);
+    	tv.setText(text);
+    	tv.setGravity(Gravity.LEFT);
+    	tv.setPadding(15, 2, 2, 2);
+    	tv.setTextSize(15);
+    	tv.setTypeface(null, Typeface.BOLD);
+    	tv.setTextColor(Color.BLACK);
+    	return tv;
+	}
+	
+	protected String getDateFromHolder(Map<String, List> holder) {
+		if(holder == null)
+			return null;
+		
+		List dateList = holder.get("date");
+		if(dateList == null)
+			return null;
+		
+		String date = null;
+		Iterator it = dateList.iterator();
+		if(it.hasNext())
+			date = (String)it.next();
+		
+		return date;
+	}
+
+}

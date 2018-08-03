@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linear_layout_ep"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:orientation="horizontal" >
+
+    <TableLayout
+        android:id="@+id/tableLayout_ep_left"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:layout_marginRight="1px"
+        android:layout_weight="1" >
+        <TableRow
+            style="@style/tableRow_title"
+            android:id="@+id/tableRow_ep_title_left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/tableRow_margin" >
+            <TextView
+                style="@style/textView_title"
+                android:id="@+id/textView_ep_title_left"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lease"/>
+            
+        </TableRow>
+        
+        <TableRow
+            style="@style/tableRow_left"
+            android:id="@+id/tableRow_ep_left_term"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/tableRow_margin"
+              >
+
+            <TextView
+                style="@style/textView_left_cat"
+                android:id="@+id/textView_left_term"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Term:" 
+                android:layout_weight="2" />
+            
+            <TextView
+                style="@style/textView_left"
+                android:id="@+id/textView_left_term_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Size"
+                android:layout_weight="0" />
+            
+        </TableRow>
+        
+        <TableRow
+            style="@style/tableRow_left"
+            android:id="@+id/tableRow_ep_left_apr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/tableRow_margin" >
+
+            <TextView
+                style="@style/textView_left_cat"
+                android:id="@+id/textView_left_apr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="APR%: "
+                android:layout_weight="2" />
+            
+            <TextView
+                style="@style/textView_left"
+                android:id="@+id/textView_left_apr_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Size"
+                android:layout_weight="0"/>
+            
+        </TableRow>
+        
+        <TableRow
+            style="@style/tableRow_left"
+            android:id="@+id/tableRow_ep_left_miles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/tableRow_margin" >
+
+            <TextView
+                android:id="@+id/textView_left_miles"
+                style="@style/textView_left_cat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Miles:"
+                android:layout_weight="2" />
+            
+            <TextView
+                style="@style/textView_left"
+                android:id="@+id/textView_left_miles_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Size"
+                android:layout_weight="0" />
+            
+        </TableRow>
+        
+        <TableRow
+            style="@style/tableRow_left"
+            android:id="@+id/tableRow_ep_left_aquisition_fee"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/tableRow_margin" >
+
+            <TextView
+                style="@style/textView_left_cat"
+                android:id="@+id/textView_left_aquisition_fee"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Aquisition Fee:"
+                android:scrollHorizontally="false"
+                android:layout_weight="2" />
+            
+            <TextView
+                style="@style/textView_left"
+                android:id="@+id/textView_left_aquisition_fee_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="$540"
+                android:layout_weight="0" />
+            
+        </TableRow>
+        
+        <TableRow
+            style="@style/tableRow_left"
+            android:id="@+id/tableRow_ep_left_down_payment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/tableRow_margin"  >
+
+            <TextView
+                style="@style/textView_left_cat"
+                android:id="@+id/textView_left_down_payment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Down Payment:"
+                android:layout_weight="2"/>
+            
+            <TextView
+                style="@style/textView_left"
+                android:id="@+id/textView_left_down_payment_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_weight="1"/>
+            
+        </TableRow>     
+        
+       <TableRow
+           style="@style/tableRow_left"
+            android:id="@+id/tableRow_ep_left_trade_in"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/tableRow_margin"  >
+
+            <TextView
+                style="@style/textView_left_cat"
+                android:id="@+id/textView_left_trade_in"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Trade In:"
+                android:layout_weight="2" />
+            
+            <TextView
+                style="@style/textView_left"
+                android:id="@+id/textView_left_trade_in_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_weight="0"/>
+            
+        </TableRow> 
+        
+    </TableLayout>
+
+    <TableLayout
+        android:id="@+id/tableLayout_ep_right"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:layout_weight="1"  >
+
+        <TableRow
+            style="@style/tableRow_title"
+            android:id="@+id/tableRow2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/tableRow_margin"  >
+
+
+            <TextView
+                style="@style/textView_title"
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Finance"
+
+                 />
+        </TableRow>
+
+        <TableRow
+            style="@style/tableRow_right"
+            android:id="@+id/tableRow_ep_right_term"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/tableRow_margin"
+              >
+
+            <TextView
+                style="@style/textView_right_cat"
+                android:id="@+id/textView_right_term"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Term:" 
+                android:layout_weight="2" />
+            
+            <TextView
+                style="@style/textView_right"
+                android:id="@+id/textView_right_term_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Size"
+                android:layout_weight="0" />
+            
+        </TableRow>
+        
+        <TableRow
+            style="@style/tableRow_right"
+            android:id="@+id/tableRow_ep_right_apr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/tableRow_margin" >
+
+            <TextView
+                style="@style/textView_right_cat"
+                android:id="@+id/textView_right_apr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="APR%"
+                android:layout_weight="2" />
+            
+            <TextView
+                style="@style/textView_right"
+                android:id="@+id/textView_right_apr_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Size"
+                android:layout_weight="0"/>
+            
+        </TableRow>            
+            
+        <TableRow
+            style="@style/tableRow_right"
+            android:id="@+id/tableRow_ep_right_down_payment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/tableRow_margin"  >
+
+            <TextView
+                style="@style/textView_right_cat"
+                android:id="@+id/textView_right_down_payment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Down Payment:"
+                android:layout_weight="2"/>
+            
+            <TextView
+                style="@style/textView_right"
+                android:id="@+id/textView_right_down_payment_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_weight="0"/>
+            
+        </TableRow>     
+        
+       <TableRow
+           	style="@style/tableRow_right"
+            android:id="@+id/tableRow_ep_right_trade_in"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/tableRow_margin"  >
+
+            <TextView
+                style="@style/textView_right_cat"
+                android:id="@+id/textView_right_trade_in"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Trade In:" 
+                android:layout_weight="2"/>
+            
+            <TextView
+                style="@style/textView_right"
+                android:id="@+id/textView_right_trade_in_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_weight="0"/>
+            
+        </TableRow> 
+
+    </TableLayout>
+</LinearLayout>
+

@@ -1,0 +1,88 @@
+package mavisBeacon.practice;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
+import android.widget.*;
+
+public class HelloAndroid extends Activity {
+	
+	/*
+	
+	 OnClickListener radio_listener = new OnClickListener() {
+	        public void onClick(View v) {
+	            // Perform action on clicks
+	            RadioButton rb = (RadioButton) v;
+	            Toast.makeText(HelloAndroid.this, rb.getText(), Toast.LENGTH_SHORT).show();
+	        }
+	    };
+	*/
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+       
+        /*
+        final ImageButton button = (ImageButton) findViewById(R.id.android_button);
+        button.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on clicks
+                Toast.makeText(HelloAndroid.this, "Beep Bop", Toast.LENGTH_SHORT).show();
+            }
+        });
+        
+        */
+        
+        final EditText edittext = (EditText) findViewById(R.id.edittext);
+        edittext.setOnKeyListener(new OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                  // Perform action on key press
+                  Toast.makeText(HelloAndroid.this, edittext.getText(), Toast.LENGTH_SHORT).show();
+                  return true;
+                }
+                return false;
+            }
+        });
+        
+        /*
+        final CheckBox checkbox = (CheckBox) findViewById(R.id.checkbox);
+        checkbox.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on clicks
+                if (checkbox.isChecked()) {
+                    Toast.makeText(HelloAndroid.this, "Selected", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(HelloAndroid.this, "Not selected", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+     
+        final RadioButton radio_red = (RadioButton) findViewById(R.id.radio_red);
+        final RadioButton radio_blue = (RadioButton) findViewById(R.id.radio_blue);
+        radio_red.setOnClickListener(radio_listener);
+        radio_blue.setOnClickListener(radio_listener);
+
+        
+        final ToggleButton togglebutton = (ToggleButton) findViewById(R.id.togglebutton);
+        togglebutton.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on clicks
+                if (togglebutton.isChecked()) {
+                    Toast.makeText(HelloAndroid.this, "ON", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(HelloAndroid.this, "OFF", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+*/
+
+        setContentView(R.layout.main);
+        
+    }//end onCreate
+    
+}
+

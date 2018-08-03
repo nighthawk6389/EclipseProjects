@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mavis.nycsubwayhelpernew"
+    android:versionCode="5"
+    android:versionName="1.4" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.mavis.nycsubwayhelpernew.SingleStationChooser"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.mavis.nycsubwayhelpernew.SetDefaults"
+            android:label="@string/title_activity_set_defaults" >
+        </activity>
+        <activity
+            android:name="com.mavis.nycsubwayhelpernew.AlarmActivity"
+            android:label="@string/title_activity_alarm" >
+        </activity>
+        <activity
+            android:name="com.mavis.nycsubwayhelpernew.StatusActivity"
+            android:label="@string/title_activity_status" >
+        </activity>
+        <activity
+            android:name="com.mavis.nycsubwayhelpernew.NYCSubwayHelper"
+            android:label="@string/title_activity_tabs_home" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.mavis.nycsubwayhelpernew.QuickView"
+            android:label="@string/title_activity_quick_view" >
+        </activity>
+        <activity
+            android:name="com.mavis.nycsubwayhelpernew.StationToTrainsChooser"
+            android:label="@string/title_activity_station_to_trains_chooser" >
+        </activity>
+    </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+</manifest>

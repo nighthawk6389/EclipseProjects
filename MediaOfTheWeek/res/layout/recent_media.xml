@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="fill"
+    android:orientation="vertical"
+    android:background="#ffffff">
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1"
+        android:text="Latest Posts"
+        android:layout_gravity="left"
+        android:gravity="left"
+        android:textColor="#000000"
+        android:padding="5dip"
+        android:textSize="13dip"
+        />
+    
+    <TableLayout 
+    	android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:shrinkColumns="2"
+    	>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dip" >
+
+            <TextView
+                android:padding="3dip"
+                android:text="1"
+                android:textColor="#000000"
+                android:textSize="12dip" />
+
+            <ImageView
+                android:id="@+id/clock_image"
+                android:src="@drawable/ic_clock" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+                 
+                <TextView
+                    android:id="@+id/linkTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:scrollHorizontally="false"
+                    android:text="This is the title of the url, make it long.This is the title of the url, make it long"
+                    android:textColor="#000000"
+                    android:textSize="12dip" />
+
+                <TextView
+                    android:id="@+id/linkSummary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:text="This story is really inspirational(check out 2:10)"
+                    android:textColor="#000000"
+                    android:textSize="10dip" />
+
+                <TextView
+                    android:id="@+id/linkDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:text="Nov 23 20 at 9:41 PM"
+                    android:textColor="#c0c3c4"
+                    android:textSize="8dip" />
+                
+            </LinearLayout>
+        </TableRow>
+
+	  </TableLayout>
+	  
+</LinearLayout>
+
+	  

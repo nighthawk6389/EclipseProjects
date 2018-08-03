@@ -1,0 +1,54 @@
+package mavisBeacon.helloAndroid;
+
+import java.util.Iterator;
+import java.util.List;
+
+import android.app.Activity;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.widget.ScrollView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
+
+public class TabData extends Activity {
+	
+	private static int[] TABLE_ROW_MARGINS = {2,2,2,2};
+	private static int TABLE_ROW_BG = Color.BLACK;
+	
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		
+		TableLayout layout = new TableLayout(this);
+		layout.setPadding(10, 5, 10, 5);
+		
+		List<String> columns = URLHelper.parseURLDataNewlines("util/getColumns.php");
+		Iterator<String> it = columns.iterator();
+		while(it.hasNext()){
+			String next = it.next();
+			if(next.equals(""))
+				continue;
+			
+			TableLayout.LayoutParams tableRowParams=new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT,TableLayout.LayoutParams.WRAP_CONTENT);
+			tableRowParams.setMargins(TABLE_ROW_MARGINS[0], TABLE_ROW_MARGINS[1], TABLE_ROW_MARGINS[2], TABLE_ROW_MARGINS[3]);
+			
+			
+			TableRow tr = new TableRow(this);
+			tr.setBackgroundColor(Color.BLACK);
+			tr.setLayoutParams(tableRowParams);
+			
+			TextView text = new TextView(this);
+			String column = URLHelper.capitalizeAndReplaceUnderscores(next);
+			text.setText(column);
+			text.setTextSize(8);
+			tr.addView(text);
+			layout.addView(tr);
+		}
+		
+		ScrollView sv = new ScrollView(this);
+		sv.addView(layout);
+		super.setContentView(sv);
+	
+	}
+}

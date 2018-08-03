@@ -1,0 +1,85 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".SetDefaults" >
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="27dp"
+        android:gravity="center"
+        android:text="Please enter your defaults"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/yellow" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Default Train"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/silver" />
+    
+    <Spinner
+        android:id="@+id/spinner_train2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@+drawable/spinner_default_holo_dark" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Default Station"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/silver" />
+    
+    <Spinner
+        android:id="@+id/spinner_station2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@+drawable/spinner_default_holo_dark" />
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal" >
+
+	    <Button
+	        android:id="@+id/button2"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:onClick="cancelButtonClicked"
+	        android:padding="10dp"
+	        android:text="Cancel"
+	        android:background="@drawable/custom_button" 
+            android:textColor="@color/white" />
+
+	    <Button
+	        android:id="@+id/button1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="right"
+	        android:layout_weight="1"
+	        android:onClick="saveButtonClicked"
+	        android:padding="10dp"
+	        android:text="Save"
+	        android:background="@drawable/custom_button" 
+            android:textColor="@color/white" />
+
+     </LinearLayout>
+
+</LinearLayout>

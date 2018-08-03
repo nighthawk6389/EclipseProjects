@@ -1,0 +1,41 @@
+package mavisBeacon.helloAndroid;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+
+public class Trims extends Activity{
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		
+		Intent i = this.getIntent();
+		int action = i.getIntExtra("action", 0);
+		String manufacturer = i.getStringExtra("manufacturer");
+		String year = i.getStringExtra("year");
+		String model = i.getStringExtra("model");
+		
+		FetchURLListener l = new FetchURLListener(this,action,manufacturer,year,model,"","");
+		
+		View view = null;
+		if(action == 0){
+			view = l.getManufacturers();
+		}
+		else if (action == 1){
+			view = l.getYears();
+		}
+		else if (action == 2){
+			view = l.getModels();
+		}
+		else if (action == 3){
+			view = l.getTrims();
+		}
+		
+		super.setContentView(view);
+
+
+	}
+}

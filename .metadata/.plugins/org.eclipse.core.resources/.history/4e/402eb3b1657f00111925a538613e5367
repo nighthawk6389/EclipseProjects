@@ -1,0 +1,38 @@
+import java.util.ArrayList;
+
+
+public class Neighbor {
+	
+	private int id;
+	private ArrayList <Integer> poisonReverseUsages = new ArrayList<Integer>();
+	private ArrayList <SDCost> costsToEveryNode = new ArrayList<SDCost>();
+	
+	public Neighbor(int id){
+		this.id = id;
+	}
+	
+	public void setUsedForAccessTo (int i){
+		poisonReverseUsages.add(i);
+	}
+	
+	public boolean isUsedForAccessTo(int i){
+		return poisonReverseUsages.contains(i);
+	}
+	
+	public void removeAccessTo(int i){
+		poisonReverseUsages.remove(new Integer(i));
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public String toString(){
+		return id+""; 
+	}
+
+}

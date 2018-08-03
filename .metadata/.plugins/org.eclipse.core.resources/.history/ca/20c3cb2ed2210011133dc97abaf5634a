@@ -1,0 +1,69 @@
+package mavisBeacon.motw;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class Winners extends MediaTab {
+	
+	private String titleName = "Winners";
+	private String categoryName = "winners";
+
+	public void onCreate(Bundle savedInstanceState) {
+    	super.onCreate(savedInstanceState);
+    	
+    	super.updateView(false);
+    	    	
+	}
+	
+	@Override
+	protected View getActivityStructureView(Map<String,List> holder){
+	
+		LinearLayout ll = this.createMediaLinearLayout();
+       	String date = this.getDateFromHolder(holder);
+    	TextView title = this.createCategoryTitle(titleName + " from " + date);
+    	TableLayout table = this.createMediaTable(holder, categoryName);
+    	
+    	ll.addView(title);
+       	ll.addView(this.createBreakLine());
+    	ll.addView(table);
+    	
+    	//ScrollView sv = new ScrollView(this);
+    	//sv.addView(ll);
+    	
+    	return ll;
+	}
+	
+	
+	@Override
+	protected View runUpdateForNewest() {
+       	Map<String,List> holder = GetMediaHelper.getCurrentMediaList();
+       	if( holder == null ){
+       		return null;
+       	}
+       	return this.getActivityStructureView(holder);
+	}
+
+	@Override
+	protected View runUpdateForIndex(int index) {
+		Map<String,List> holder = GetMediaHelper.getMediaListAtIndex(index);
+       	if( holder == null ){
+       		return null;
+       	}
+       	return this.getActivityStructureView(holder);
+	}
+	
+}
